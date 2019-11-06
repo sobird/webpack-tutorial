@@ -21,6 +21,12 @@ function component() {
 
   element.appendChild(myIcon);
 
+  var myFont = document.createElement('span');
+  myFont.classList.add('iconfont');
+  myFont.classList.add('wb-home');
+
+  element.appendChild(myFont);
+
   return element;
 }
 
