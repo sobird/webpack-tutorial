@@ -4,6 +4,7 @@
   "description": "Webpack Tutorial",
   "main": "index.js",
   "scripts": {
+    "start": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +19,10 @@
   "bugs": {
     "url": "https://github.com/sobird/webpack-tutorial/issues"
   },
-  "homepage": "https://github.com/sobird/webpack-tutorial#readme"
+  "homepage": "https://github.com/sobird/webpack-tutorial#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
 }
