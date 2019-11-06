@@ -7,15 +7,19 @@
  */
 
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
   devtool: 'eval-source-map',
-  entry: './src/index.js',
+  entry: {
+    app: './src/index.js',
+    print: './src/print.js'
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '../dist/',
-    filename: 'bundle.js'
+    //publicPath: '../dist/',
+    filename: '[name].bundle.js',
   },
   module: {
     rules: [
@@ -51,5 +55,11 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: '管理输出',
+      template: 'public/index.html',
+    })
+  ]
 };
