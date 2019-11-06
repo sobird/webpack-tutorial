@@ -8,6 +8,14 @@ import _ from 'lodash';
 import './style.css';
 import Icon from './icon.svg';
 
+/**
+ * 在使用 d3 等工具实现某些数据可视化时，这个功能极其有用。
+ * 可以不用在运行时再去发送一个 ajax 请求获取和解析数据，
+ * 而是在构建过程中将其提前加载到模块中，以便浏览器加载模块后，
+ * 直接就可以访问解析过的数据。
+ */
+import Data from './data.xml';
+
 function component() {
   let element = document.createElement('div');
 
@@ -26,6 +34,8 @@ function component() {
   myFont.classList.add('wb-home');
 
   element.appendChild(myFont);
+
+  console.log(Data);
 
   return element;
 }
