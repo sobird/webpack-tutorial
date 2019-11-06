@@ -22,6 +22,9 @@ module.exports = {
     //publicPath: '../dist/',
     filename: '[name].bundle.js',
   },
+  devServer: {
+    contentBase: './dist'
+  },
   module: {
     rules: [
       {
