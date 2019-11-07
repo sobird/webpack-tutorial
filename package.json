@@ -1,5 +1,6 @@
 {
   "name": "webpack-tutorial",
+  "sideEffects": false,
   "version": "1.0.0",
   "description": "Webpack Tutorial",
   "private": true,

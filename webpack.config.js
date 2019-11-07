@@ -3,6 +3,8 @@
  * 
  * @see https://webpack.js.org/concepts/configuration/
  * 
+ * 通过将 mode 选项设置为 production，启用 minification(代码压缩) 和 tree shaking
+ * 
  * sobird<i@sobird.me> at 2019-11-06 16:53:47 build.
  */
 
@@ -12,7 +14,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   devtool: 'inline-source-map',
   entry: {
     app: './src/index.js',
@@ -21,6 +23,9 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     //publicPath: '../dist/',
     filename: '[name].bundle.js',
+  },
+  optimization: {
+    //usedExports: true,
   },
   devServer: {
     contentBase: './dist',
