@@ -74,6 +74,10 @@ module.exports = {
         use: [
           'xml-loader'
         ]
+      },
+      {
+        test: require.resolve('./src/globals.js'),
+        use: 'exports-loader?file,parse=helpers.parse'
       }
     ]
   },

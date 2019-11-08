@@ -5,6 +5,9 @@
  */
 
 import Print from './print';
+import { file, parse } from './globals.js';
+
+console.log(file);
 
 function component() {
   var element = document.createElement('div');
