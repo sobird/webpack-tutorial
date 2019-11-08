@@ -17,7 +17,7 @@ module.exports = {
   mode: 'production',
   devtool: 'inline-source-map',
   entry: {
-    index: './src/index.js',
+    index: './src/index.ts',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -44,6 +44,11 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
+      },
       {
         test: /\.css$/,
         use: [
@@ -80,6 +85,9 @@ module.exports = {
         use: 'exports-loader?file,parse=helpers.parse'
       }
     ]
+  },
+  resolve: {
+    extensions: [ '.tsx', '.ts', '.js' ]
   },
   plugins: [
     new CleanWebpackPlugin(),
