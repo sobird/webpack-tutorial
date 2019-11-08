@@ -17,7 +17,8 @@ module.exports = {
   mode: 'production',
   devtool: 'inline-source-map',
   entry: {
-    app: './src/index.js',
+    index: './src/index.js',
+    another: './src/another-module.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -26,6 +27,9 @@ module.exports = {
   },
   optimization: {
     //usedExports: true,
+    splitChunks: {
+      chunks: 'all'
+    }
   },
   devServer: {
     contentBase: './dist',
