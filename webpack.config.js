@@ -22,18 +22,25 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     //publicPath: '../dist/',
-    filename: '[name].bundle.js',
-    chunkFilename: '[name].bundle.js',
+    filename: '[name].[contenthash].js',
+    //chunkFilename: '[name].bundle.js',
   },
   optimization: {
     // usedExports: true,
-    // splitChunks: {
-    //   chunks: 'all'
-    // }
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        }
+      }
+    },
+    runtimeChunk: 'single',
   },
   devServer: {
     contentBase: './dist',
-    hot: true,
+    //hot: true,
   },
   module: {
     rules: [
@@ -75,6 +82,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: '管理输出',
       template: 'public/index.html',
-    })
+    }),
+    new webpack.HashedModuleIdsPlugin()
   ]
 };

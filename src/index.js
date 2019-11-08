@@ -5,6 +5,7 @@
  */
 
 import _ from 'lodash';
+import Print from './print';
 
 function component() {
   var element = document.createElement('div');
@@ -24,6 +25,8 @@ function component() {
     print();
 
   });
+
+  element.onclick = Print.bind(null, 'Hello webpack!');
 
   return element;
 }
