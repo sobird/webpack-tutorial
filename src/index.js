@@ -3,7 +3,7 @@
  * 
  * sobird<i@sobird.me> at 2019-11-06 18:23:36 build.
  */
-
+import 'babel-polyfill';
 import Print from './print';
 import { file, parse } from './globals.js';
 
