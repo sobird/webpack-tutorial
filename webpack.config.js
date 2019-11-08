@@ -13,91 +13,95 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
-module.exports = {
-  mode: 'production',
-  devtool: 'inline-source-map',
-  entry: {
-    index: './src/index.ts',
-  },
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    //publicPath: '../dist/',
-    filename: '[name].[contenthash].js',
-    //chunkFilename: '[name].bundle.js',
-  },
-  optimization: {
-    // usedExports: true,
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all'
-        }
-      }
+module.exports = env => { 
+  console.log(env);
+
+  return {
+    mode: 'production',
+    devtool: 'inline-source-map',
+    entry: {
+      index: './src/index.ts',
     },
-    runtimeChunk: 'single',
-  },
-  devServer: {
-    contentBase: './dist',
-    //hot: true,
-  },
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      //publicPath: '../dist/',
+      filename: '[name].[contenthash].js',
+      //chunkFilename: '[name].bundle.js',
+    },
+    optimization: {
+      // usedExports: true,
+      splitChunks: {
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all'
+          }
+        }
       },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
-      },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          'file-loader'
-        ]
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: [
-          'file-loader'
-        ]
-      },
-      {
-        test: /\.(csv|tsv)$/,
-        use: [
-          'csv-loader'
-        ]
-      },
-      {
-        test: /\.xml$/,
-        use: [
-          'xml-loader'
-        ]
-      },
-      {
-        test: require.resolve('./src/globals.js'),
-        use: 'exports-loader?file,parse=helpers.parse'
-      }
+      runtimeChunk: 'single',
+    },
+    devServer: {
+      contentBase: './dist',
+      //hot: true,
+    },
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          use: 'ts-loader',
+          exclude: /node_modules/
+        },
+        {
+          test: /\.css$/,
+          use: [
+            'style-loader',
+            'css-loader'
+          ]
+        },
+        {
+          test: /\.(png|svg|jpg|gif)$/,
+          use: [
+            'file-loader'
+          ]
+        },
+        {
+          test: /\.(woff|woff2|eot|ttf|otf)$/,
+          use: [
+            'file-loader'
+          ]
+        },
+        {
+          test: /\.(csv|tsv)$/,
+          use: [
+            'csv-loader'
+          ]
+        },
+        {
+          test: /\.xml$/,
+          use: [
+            'xml-loader'
+          ]
+        },
+        {
+          test: require.resolve('./src/globals.js'),
+          use: 'exports-loader?file,parse=helpers.parse'
+        }
+      ]
+    },
+    resolve: {
+      extensions: [ '.tsx', '.ts', '.js' ]
+    },
+    plugins: [
+      new CleanWebpackPlugin(),
+      new HtmlWebpackPlugin({
+        title: '管理输出',
+        template: 'public/index.html',
+      }),
+      new webpack.HashedModuleIdsPlugin(),
+      new webpack.ProvidePlugin({
+        join: ['lodash', 'join']
+      })
     ]
-  },
-  resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ]
-  },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      title: '管理输出',
-      template: 'public/index.html',
-    }),
-    new webpack.HashedModuleIdsPlugin(),
-    new webpack.ProvidePlugin({
-      join: ['lodash', 'join']
-    })
-  ]
-};
+  };
+}

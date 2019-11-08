@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --open",
-    "build": "webpack --config webpack.config.js",
+    "build": "webpack --config webpack.config.js --env.production",
     "watch": "webpack --watch",
     "server": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
