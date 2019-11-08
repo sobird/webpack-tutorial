@@ -83,6 +83,9 @@ module.exports = {
       title: '管理输出',
       template: 'public/index.html',
     }),
-    new webpack.HashedModuleIdsPlugin()
+    new webpack.HashedModuleIdsPlugin(),
+    new webpack.ProvidePlugin({
+      join: ['lodash', 'join']
+    })
   ]
 };

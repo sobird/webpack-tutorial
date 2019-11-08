@@ -4,7 +4,6 @@
  * sobird<i@sobird.me> at 2019-11-06 18:23:36 build.
  */
 
-import _ from 'lodash';
 import Print from './print';
 
 function component() {
@@ -12,7 +11,7 @@ function component() {
   var button = document.createElement('button');
   var br = document.createElement('br');
 
-  button.innerHTML = 'Click me and look at the console!';
+  element.innerHTML = join(['Hello', 'webpack'], ' ');
   element.appendChild(br);
   element.appendChild(button);
 
@@ -26,7 +25,7 @@ function component() {
 
   });
 
-  element.onclick = Print.bind(null, 'Hello webpack!');
+  //element.onclick = Print.bind(null, 'Hello webpack!');
 
   return element;
 }
