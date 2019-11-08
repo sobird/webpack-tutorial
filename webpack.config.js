@@ -18,18 +18,18 @@ module.exports = {
   devtool: 'inline-source-map',
   entry: {
     index: './src/index.js',
-    another: './src/another-module.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
     //publicPath: '../dist/',
     filename: '[name].bundle.js',
+    chunkFilename: '[name].bundle.js',
   },
   optimization: {
-    //usedExports: true,
-    splitChunks: {
-      chunks: 'all'
-    }
+    // usedExports: true,
+    // splitChunks: {
+    //   chunks: 'all'
+    // }
   },
   devServer: {
     contentBase: './dist',
