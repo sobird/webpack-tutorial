@@ -7,7 +7,13 @@ import 'babel-polyfill';
 import Print from './print';
 import { file, parse } from './globals.js';
 
+import './style.css'
+
 console.log(file);
+
+import png from './assets/Bird.png';
+
+console.log(png);
 
 function component() {
   var element = document.createElement('div');

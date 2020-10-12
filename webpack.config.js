@@ -11,6 +11,10 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+// https://github.com/shellscape/webpack-manifest-plugin
+const ManifestPlugin = require('webpack-manifest-plugin');
+
 const webpack = require('webpack');
 
 module.exports = env => { 
@@ -101,7 +105,8 @@ module.exports = env => {
       new webpack.HashedModuleIdsPlugin(),
       new webpack.ProvidePlugin({
         join: ['lodash', 'join']
-      })
+      }),
+      new ManifestPlugin()
     ]
   };
 }
