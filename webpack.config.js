@@ -17,11 +17,9 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 
 const webpack = require('webpack');
 
-module.exports = env => { 
-  console.log(env);
-
+module.exports = env => {
   return {
-    mode: 'production',
+    //mode: 'production',
     devtool: 'inline-source-map',
     entry: {
       index: './src/index.ts',
@@ -29,7 +27,7 @@ module.exports = env => {
     output: {
       path: path.resolve(__dirname, 'dist'),
       //publicPath: '../dist/',
-      filename: '[name].[contenthash].js',
+      filename: '[name].js',
       //chunkFilename: '[name].bundle.js',
     },
     optimization: {
@@ -52,6 +50,16 @@ module.exports = env => {
     module: {
       rules: [
         {
+          test: /\.js$/,
+          exclude: /(node_modules)/,//排除掉node_module目录
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env']
+            }
+          }
+        },
+        {
           test: /\.tsx?$/,
           use: 'ts-loader',
           exclude: /node_modules/
@@ -65,9 +73,10 @@ module.exports = env => {
         },
         {
           test: /\.(png|svg|jpg|gif)$/,
-          use: [
-            'file-loader'
-          ]
+          loader: 'file-loader',
+          options: {
+            name: '[path][name].[ext]',
+          },
         },
         {
           test: /\.(woff|woff2|eot|ttf|otf)$/,
@@ -94,7 +103,7 @@ module.exports = env => {
       ]
     },
     resolve: {
-      extensions: [ '.tsx', '.ts', '.js' ]
+      extensions: ['.tsx', '.ts', '.js']
     },
     plugins: [
       new CleanWebpackPlugin(),
