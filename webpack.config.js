@@ -8,62 +8,65 @@
  * sobird<i@sobird.me> at 2019-11-06 16:53:47 build.
  */
 
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import webpack from 'webpack';
+
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
 // https://github.com/shellscape/webpack-manifest-plugin
-const ManifestPlugin = require('webpack-manifest-plugin');
+import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 
-const webpack = require('webpack');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-module.exports = env => {
-  return {
+export default (env) => {
+  const config =  {
     //mode: 'production',
-    devtool: 'inline-source-map',
+    // devtool: 'inline-source-map',
     entry: {
-      index: './src/index.ts',
+      app: [
+        './src/index.ts'
+      ]
     },
     output: {
-      path: path.resolve(__dirname, 'dist'),
-      //publicPath: '../dist/',
-      filename: '[name].js',
-      //chunkFilename: '[name].bundle.js',
-    },
-    optimization: {
-      // usedExports: true,
-      splitChunks: {
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all'
-          }
-        }
-      },
-      runtimeChunk: 'single',
+      path: resolve(__dirname, 'dist'),
+      filename: '[name].[contenthash].js',
+      clean: true,
+      // publicPath: '../dist/',
+      // chunkFilename: '[name].bundle.js',
     },
     devServer: {
-      contentBase: './dist',
-      //hot: true,
+      // open: true,
+      host: '0.0.0.0',
+      port: 3000,
+      hot: true, // 开启HMR功能
+      historyApiFallback: true,
+      static: {
+        directory: resolve(__dirname, 'public')
+      },
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
     },
     module: {
       rules: [
         {
-          test: /\.js$/,
-          exclude: /(node_modules)/,//排除掉node_module目录
-          use: {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env']
-            }
-          }
-        },
-        {
-          test: /\.tsx?$/,
+          test: /\.ts?$/,
           use: 'ts-loader',
-          exclude: /node_modules/
+          exclude: ['/node_modules/'],
         },
+        // {
+        //   test: /\.js$/,
+        //   exclude: /(node_modules)/,//排除掉node_module目录
+        //   use: {
+        //     loader: 'babel-loader',
+        //     options: {
+        //       presets: ['@babel/preset-env']
+        //     }
+        //   }
+        // },
         {
           test: /\.css$/,
           use: [
@@ -96,26 +99,45 @@ module.exports = env => {
             'xml-loader'
           ]
         },
-        {
-          test: require.resolve('./src/globals.js'),
-          use: 'exports-loader?file,parse=helpers.parse'
-        }
+        // {
+        //   test: import.meta.resolve('./src/globals.js'),
+        //   use: 'exports-loader?file,parse=helpers.parse'
+        // }
       ]
-    },
-    resolve: {
-      extensions: ['.tsx', '.ts', '.js']
     },
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: '管理输出',
-        template: 'public/index.html',
+        template: resolve('public/index.html'),
       }),
-      new webpack.HashedModuleIdsPlugin(),
-      new webpack.ProvidePlugin({
-        join: ['lodash', 'join']
-      }),
-      new ManifestPlugin()
-    ]
+      // https://www.webpackjs.com/plugins/hashed-module-ids-plugin/
+      // new webpack.ids.HashedModuleIdsPlugin(),
+      // new webpack.ProvidePlugin({
+      //   join: ['lodash', 'join']
+      // }),
+      // new WebpackManifestPlugin()
+    ],
+    // resolve: {
+    //   extensions: ['.tsx', '.ts', '.js'],
+    //   alias: {
+    //     '@': resolve(__dirname, 'src'),
+    //   },
+    // },
+    // optimization: {
+    //   // usedExports: true,
+    //   splitChunks: {
+    //     cacheGroups: {
+    //       vendor: {
+    //         test: /[\\/]node_modules[\\/]/,
+    //         name: 'vendors',
+    //         chunks: 'all'
+    //       }
+    //     }
+    //   },
+    //   runtimeChunk: 'single',
+    // },
   };
-}
+
+  return config;
+};

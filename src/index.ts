@@ -8,17 +8,19 @@ interface Person {
   lastName: string;
 }
 
-import './index.js';
+// import './index.js';
 
 class Test {
   
 }
 
+const test = [1, 2, 3, 4];
 
-function greeter(person: Person) {
-  return "Hello, " + person.firstName;
+
+function greeter(person: Person, name?: string) {
+  return 'Hello, ' + person.firstName;
 }
 
-let user = { firstName: "Jane", lastName: "User" };
+let user = { firstName: 'Jane', lastName: 'User' };
 
 document.body.innerHTML = greeter(user);

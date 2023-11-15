@@ -609,6 +609,7 @@ module.exports = {
   singleAttributePerLine: false
 };
 ```
+如果配置了 `prettier` 注意配置规则与eslint保持一致，或者仅配置eslint规则即可。
 
 ## .browserslistrc
 在不同的前端工具之间共用目标浏览器和 `Node` 版本的配置文件。它主要被以下工具使用：*Autoprefixer*，*Babel*，*post-preset-env*，*eslint-plugin-compat*，*stylelint-unsupported-browser-features*，*postcss-normalize* 。
@@ -641,6 +642,11 @@ not dead
 ```
 
 ## eslint (以配置airbnb规则为例)
+
+```sh
+# 快速初始化一个eslint配置
+npm init @eslint/config
+```
 
 ### 安装airbnb基础规则
 
