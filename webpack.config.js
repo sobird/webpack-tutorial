@@ -20,13 +20,14 @@ import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 export default (env) => {
   const config = {
-    //mode: 'production',
-    // devtool: 'inline-source-map',
+    devtool: isProduction ? false : 'inline-source-map',
     entry: {
       app: [
-        './src/index.ts'
+        './src/index.tsx'
       ]
     },
     output: {
@@ -35,6 +36,11 @@ export default (env) => {
       clean: true,
       // publicPath: '../dist/',
       // chunkFilename: '[name].bundle.js',
+      clean: {
+        keep(asset) {
+          return asset.includes('sample');
+        },
+      }
     },
     devServer: {
       // open: true,
@@ -52,8 +58,15 @@ export default (env) => {
     module: {
       rules: [
         {
-          test: /\.ts?$/,
-          use: 'ts-loader',
+          test: /\.(ts|tsx)$/i,
+          use: [
+            {
+              loader: 'ts-loader',
+              options: {
+                transpileOnly: true,
+              },
+            },
+          ],
           exclude: ['/node_modules/'],
         },
         // {
@@ -116,12 +129,12 @@ export default (env) => {
       // }),
       // new WebpackManifestPlugin()
     ],
-    // resolve: {
-    //   extensions: ['.tsx', '.ts', '.js'],
-    //   alias: {
-    //     '@': resolve(__dirname, 'src'),
-    //   },
-    // },
+    resolve: {
+      extensions: ['.tsx', '.ts', 'jsx', '.js'],
+      alias: {
+        '@': resolve(__dirname, 'src'),
+      },
+    },
     // optimization: {
     //   // usedExports: true,
     //   splitChunks: {
