@@ -13,7 +13,6 @@ import { fileURLToPath } from 'node:url';
 import webpack from 'webpack';
 
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
 // https://github.com/shellscape/webpack-manifest-plugin
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
@@ -22,7 +21,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export default (env) => {
-  const config =  {
+  const config = {
     //mode: 'production',
     // devtool: 'inline-source-map',
     entry: {
@@ -106,7 +105,6 @@ export default (env) => {
       ]
     },
     plugins: [
-      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: '管理输出',
         template: resolve('public/index.html'),
