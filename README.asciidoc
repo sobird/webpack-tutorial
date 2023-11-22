@@ -367,7 +367,7 @@ const config = {
 * *css-loader* 让js文件可以通过 `import` 或 `require` 等命令导入css代码
 * *sass-loader* 将sass代码转换为css代码
 * *less-loader* 将less代码转换为css代码
-* *postcss-loader* 处理css代码，因为是处理css，所以postcss-loader要放在 css-loader sass-loader等之后，可以在 `webpack.config.js` 中直接进行配置，或在 `postcss.config.js` 中进行配置，postcss-loader会自动加载该配置文件。
+* *postcss-loader* 处理css代码，因为是处理css，所以postcss-loader要放在sass-loader等之后，可以在 `webpack.config.js` 中直接进行配置，或在 `postcss.config.js` 中进行配置，postcss-loader会自动加载该配置文件。
 * *postcss-preset-env* 将最新的css语法转换为目标环境浏览器能够理解的语法，新版本已内置autoprefixer功能
 
 *postcss.config.js*
@@ -401,11 +401,11 @@ const config = {
     rules: [
       {
         test: /\.s[ac]ss$/i,
-        use: [stylesHandler, 'css-loader', 'sass-loader', 'postcss-loader'],
+        use: [stylesHandler, 'css-loader', 'postcss-loader', 'sass-loader'],
       },
       {
         test: /\.less$/,
-        use: [stylesHandler, 'css-loader', 
+        use: [stylesHandler, 'css-loader', 'postcss-loader',
           {
             loader: 'less-loader',
             options: {
@@ -418,7 +418,6 @@ const config = {
               },
             },
           },
-          'postcss-loader'
         ],
       },
       {

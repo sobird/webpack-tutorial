@@ -1,6 +1,10 @@
 {
   "name": "webpack-tutorial",
-  "sideEffects": ["./src/some-side-effectful-file.js", "*.css", "*.scss"],
+  "sideEffects": [
+    "./src/some-side-effectful-file.js",
+    "*.css",
+    "*.scss"
+  ],
   "version": "1.0.0",
   "description": "Webpack Tutorial",
   "type": "module",
@@ -41,6 +45,7 @@
     "babel-polyfill": "^6.26.0",
     "css-loader": "^6.8.1",
     "csv-loader": "^3.0.2",
+    "dotenv-webpack": "^8.0.1",
     "eslint-config-sobird": "^0.1.11",
     "exports-loader": "^0.7.0",
     "file-loader": "^6.2.0",

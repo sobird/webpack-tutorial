@@ -14,6 +14,7 @@ import webpack from 'webpack';
 
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import Dotenv from 'dotenv-webpack';
 
 // https://github.com/shellscape/webpack-manifest-plugin
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
@@ -108,6 +109,15 @@ export default (env, argv) => {
     plugins: [
       new HtmlWebpackPlugin({
         template: resolve('public/index.html'),
+      }),
+      new Dotenv({
+        path: resolve(__dirname, `.env.${process.env.NODE_ENV}`),
+        safe: true,
+        silent: true,
+        systemvars: true,
+        expand: true,
+        allowEmptyValues: true,
+        defaults: resolve(__dirname, '.env.defaults'),
       }),
       // https://www.webpackjs.com/plugins/hashed-module-ids-plugin/
       // new webpack.ids.HashedModuleIdsPlugin(),
