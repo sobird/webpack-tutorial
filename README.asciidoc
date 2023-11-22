@@ -297,6 +297,17 @@ module.exports = (conf) => {
 }
 ```
 
+### compression-webpack-plugin
+gzip压缩静态资源
+
+```js
+const CompressionPlugin = require("compression-webpack-plugin");
+
+module.exports = {
+  plugins: [new CompressionPlugin()],
+};
+```
+
 ## loader
 
 ### ts-loader
