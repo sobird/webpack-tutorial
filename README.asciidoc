@@ -387,7 +387,7 @@ module.exports = {
 
 通过下面命令批量安装所需的css相关loader
 ```js
-yarn add -D style-loader css-loader sass-loader less-loader postcss-loader postcss-preset-env
+yarn add -D style-loader css-loader sass-loader less-loader postcss-loader postcss-preset-env postcss sass
 ```
 
 css 相关loader配置如下：
