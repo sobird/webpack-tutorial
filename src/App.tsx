@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.scss';
+import Bird from '@/assets/bird.png';
 
 export default () => {
   const [count, setCount] = useState(0);
@@ -14,6 +15,8 @@ export default () => {
       >
         {count}
       </button>
+
+      <img src={Bird} alt="" />
     </div>
   );
 };

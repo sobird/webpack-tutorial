@@ -4,4 +4,4 @@ dist
 src/assets
 .eslintrc.cjs
 webpack.config.js
-postcss.config.js
+postcss.config.cjs

@@ -85,6 +85,10 @@ export default (env, argv) => {
           test: /\.s[ac]ss$/i,
           use: [stylesHandler, 'css-loader', 'postcss-loader', 'sass-loader'],
         },
+        {
+          test: /\.css$/i,
+          use: [stylesHandler, 'css-loader', 'postcss-loader'],
+        },
         // {
         //   test: /\.js$/,
         //   exclude: /(node_modules)/,//排除掉node_module目录
@@ -96,46 +100,13 @@ export default (env, argv) => {
         //   }
         // },
         {
-          test: /\.css$/,
-          use: [
-            'style-loader',
-            'css-loader'
-          ]
+          test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif|mp3)$/i,
+          type: 'asset',
         },
-        {
-          test: /\.(png|svg|jpg|gif)$/,
-          loader: 'file-loader',
-          options: {
-            name: '[path][name].[ext]',
-          },
-        },
-        {
-          test: /\.(woff|woff2|eot|ttf|otf)$/,
-          use: [
-            'file-loader'
-          ]
-        },
-        {
-          test: /\.(csv|tsv)$/,
-          use: [
-            'csv-loader'
-          ]
-        },
-        {
-          test: /\.xml$/,
-          use: [
-            'xml-loader'
-          ]
-        },
-        // {
-        //   test: import.meta.resolve('./src/globals.js'),
-        //   use: 'exports-loader?file,parse=helpers.parse'
-        // }
       ]
     },
     plugins: [
       new HtmlWebpackPlugin({
-        title: '管理输出',
         template: resolve('public/index.html'),
       }),
       // https://www.webpackjs.com/plugins/hashed-module-ids-plugin/
