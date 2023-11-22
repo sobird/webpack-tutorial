@@ -2,6 +2,7 @@ node_modules
 public
 dist
 src/assets
+plugins
 .eslintrc.cjs
 webpack.config.js
 postcss.config.cjs

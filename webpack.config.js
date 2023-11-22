@@ -16,11 +16,16 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import Dotenv from 'dotenv-webpack';
 
+import MyWebpackPlugin from './plugins/MyWebpackPlugin.js';
+
 // https://github.com/shellscape/webpack-manifest-plugin
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 
+import pkg from './package.json' assert { type: 'json' };
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
 
 const isProduction = process.env.NODE_ENV === 'production';
 const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
@@ -108,7 +113,14 @@ export default (env, argv) => {
     },
     plugins: [
       new HtmlWebpackPlugin({
+        title: pkg.description,
         template: resolve('public/index.html'),
+        minify: {
+          collapseWhitespace: isProduction,
+          removeComments: isProduction,
+          minifyJS: isProduction,
+          minifyCSS: isProduction,
+        },
       }),
       new Dotenv({
         path: resolve(__dirname, `.env.${process.env.NODE_ENV}`),
@@ -118,6 +130,9 @@ export default (env, argv) => {
         expand: true,
         allowEmptyValues: true,
         defaults: resolve(__dirname, '.env.defaults'),
+      }),
+      new MyWebpackPlugin({
+        appId: pkg.name
       }),
       // https://www.webpackjs.com/plugins/hashed-module-ids-plugin/
       // new webpack.ids.HashedModuleIdsPlugin(),
