@@ -21,7 +21,7 @@ import MyWebpackPlugin from './plugins/MyWebpackPlugin.js';
 // https://github.com/shellscape/webpack-manifest-plugin
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 
-import pkg from './package.json' assert { type: 'json' };
+import pkg from './package.json' with { type: 'json' };
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
